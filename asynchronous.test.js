@@ -1,26 +1,19 @@
-// import axios from "axios";
-const API_ENDPOINT = "https://jsonplaceholder.typicode.com"
-
-function fetchAll (cb) {
-    return axios.get(`${API_ENDPOINT}/users`)
-    .then(response => cb(response.data))
-}
-function fetchTest (cb) {
-    return fetch(`${API_ENDPOINT}/users`)
-        .then(data => data.json())
-        .then(data => cb(data))
+function fetchCallback(cb) {
+    return setTimeout(cb('peanut butter'), 1000)
 }
 
-function fetchOne (id) {
-    return axios.get(`${API_ENDPOINT}/users/${id}`)
-        .then(response => response.data)
+function fetchPromise(id) {
+    return new Promise(function (resolve) {
+        setTimeout(() => {
+            resolve(id)
+        }, 1000)
+    })
 }
 
-test('callback patter', (done) => {
+test('callback pattern', (done) => {
     function callback(data) {
-        console.log('callback', data)
         try {
-            expect(data).toBe('test')
+            expect(data).toBe('peanut butter')
             done()
         } catch (error) {
             done(error)
@@ -28,5 +21,12 @@ test('callback patter', (done) => {
     }
 
     // fetchAll(callback)
-    fetchTest(callback)
+    fetchCallback(callback)
+})
+
+test('promise pattern', () => {
+    // console.log('resolve ' + user)
+    return fetchPromise(2).then((user) => {
+        expect(user).toEqual(3)
+    })
 })
