@@ -27,6 +27,6 @@ test('callback pattern', (done) => {
 test('promise pattern', () => {
     // console.log('resolve ' + user)
     return fetchPromise(2).then((user) => {
-        expect(user).toEqual(3)
+        expect(user).toEqual(2)
     })
 })
