@@ -1,3 +1,6 @@
+const axios = require('axios')
+const Users = require('./users')
+
 function forEach(items, callback) {
     for (let index = 0; index < items.length; index++) {
         console.log('forEach')
@@ -40,3 +43,14 @@ const result = [11, 12].filter(num => filterTestFn(num))
 console.log(result)
 
 //mock Implementation vs mock Return value
+jest.mock('axios')
+
+test('should jetch users', () => {
+    const users = [{name: 'Bob'}]
+    const resp = {data: users}
+    // expect(axios.get.mockResolvedValue(resp)).toEqual(resp)
+    // axios.get.mockResolvedValue(resp)
+    // return Users.all().then(data => {
+    //     expect(data).toEqual(users)
+    // })
+})
